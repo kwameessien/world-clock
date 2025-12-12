@@ -1,1 +1,13 @@
-/* App-specific styles if needed */
+/* Font and Text Styles Only */
+
+.city-name {
+  font-size: 1.25rem; /* text-xl equivalent */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+}
+
+.time-display {
+  font-size: 1.25rem; /* text-xl equivalent */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+}
