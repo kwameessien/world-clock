@@ -3,17 +3,20 @@ import ClockDisplay from './ClockDisplay'
 
 /**
  * Array of city names displayed in the world clock.
+ * First 10: top row. Next 10: bottom row.
  * The order corresponds to the timeZones array below.
  */
-const cities = ['Los Angeles', 'London', 'Paris', 'Rome', 'Tokyo', 'Lahore', 'Accra', 'Amsterdam', 'Mexico City', 'Milan']
+const cities = [
+  'Los Angeles', 'London', 'Paris', 'Rome', 'Tokyo', 'Lahore', 'Accra', 'Amsterdam', 'Mexico City', 'Milan',
+  'New York', 'Sydney', 'Dubai', 'Singapore', 'Cairo', 'São Paulo', 'Toronto', 'Berlin', 'Mumbai', 'Bangkok'
+]
 
 /**
  * UTC timezone offsets for each city in hours.
  * Negative values are behind UTC, positive values are ahead.
- * Order: Los Angeles (-7), London (+1), Paris (+2), Rome (+2), Tokyo (+9),
- *        Lahore (+5), Accra (0), Amsterdam (+1), Mexico City (-6), Milan (+1)
+ * Order matches cities array above.
  */
-const timeZones = [-7, 1, 2, 2, 9, 5, 0, 1, -6, 1] // UTC offsets
+const timeZones = [-7, 1, 2, 2, 9, 5, 0, 1, -6, 1, -5, 11, 4, 8, 2, -3, -5, 1, 5, 7] // UTC offsets
 
 /**
  * Formats a number to always have 2 digits with a leading zero if needed.
