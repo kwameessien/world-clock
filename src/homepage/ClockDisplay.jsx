@@ -5,29 +5,38 @@ function ClockDisplay({ cities, times }) {
   const firstRowCities = cities.slice(0, 10)
   const secondRowCities = cities.slice(10, 20)
 
-  const renderRow = (rowCities, startIndex) => (
-    <ul className="flex flex-wrap justify-center items-center list-none p-0 m-0 w-full">
-      {rowCities.map((city, index) => {
-        const globalIndex = startIndex + index
-        return (
-          <li key={globalIndex} className="flex-1 min-w-[120px] text-center">
-            <span className="block py-5 text-black city-name">
-              {city}
-            </span>
-            <span className="block py-5 text-black time-display">
-              {times[globalIndex]}
-            </span>
-          </li>
-        )
-      })}
-    </ul>
+  const renderRowContent = (rowCities, startIndex, keyPrefix = '') => (
+    <>
+      {rowCities.map((city, index) => (
+        <li key={`${keyPrefix}-${startIndex + index}`} className="flex-shrink-0 min-w-[140px] text-center px-4">
+          <span className="block py-5 text-black city-name">{city}</span>
+          <span className="block py-5 text-black time-display">{times[startIndex + index] ?? '00:00:00'}</span>
+        </li>
+      ))}
+      {rowCities.map((city, index) => (
+        <li key={`${keyPrefix}-dup-${startIndex + index}`} className="flex-shrink-0 min-w-[140px] text-center px-4">
+          <span className="block py-5 text-black city-name">{city}</span>
+          <span className="block py-5 text-black time-display">{times[startIndex + index] ?? '00:00:00'}</span>
+        </li>
+      ))}
+    </>
   )
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white py-8">
       <div className="w-full max-w-5xl px-4 flex flex-col gap-8">
-        {renderRow(firstRowCities, 0)}
-        {renderRow(secondRowCities, 10)}
+        {/* Top row: marquee moves right */}
+        <div className="marquee-container">
+          <ul className="marquee-track-right flex items-center list-none p-0 m-0">
+            {renderRowContent(firstRowCities, 0, 'top')}
+          </ul>
+        </div>
+        {/* Bottom row: marquee moves left */}
+        <div className="marquee-container">
+          <ul className="marquee-track-left flex items-center list-none p-0 m-0">
+            {renderRowContent(secondRowCities, 10, 'bottom')}
+          </ul>
+        </div>
       </div>
     </div>
   )
