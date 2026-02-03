@@ -8,8 +8,8 @@ html {
   background-color: white;
 }
 
-.dark body,
-.dark html {
+html.dark,
+html.dark body {
   background-color: #111827;
   color-scheme: dark;
 }
