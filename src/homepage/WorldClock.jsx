@@ -111,7 +111,7 @@ function WorldClock() {
       />
 
       <div className="py-4 px-2">
-        <GoodTimeToCall cities={filteredCities} />
+        <GoodTimeToCall cities={filteredCities} theme={settings.theme} />
       </div>
 
       <ClockDisplay

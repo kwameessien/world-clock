@@ -5,7 +5,10 @@ function getLocalHour(utcDate, offsetHours) {
   return ((h % 24) + 24) % 24
 }
 
-function GoodTimeToCall({ cities }) {
+const selectClass =
+  'rounded border border-gray-300 dark:bg-gray-700 dark:border-gray-500 dark:text-white px-2 py-1 text-sm min-w-[160px]'
+
+function GoodTimeToCall({ cities, theme = 'light' }) {
   const [cityA, setCityA] = useState(cities[0]?.id ?? '')
   const [cityB, setCityB] = useState(cities[1]?.id ?? '')
   const [activeTab, setActiveTab] = useState(0)
@@ -16,27 +19,38 @@ function GoodTimeToCall({ cities }) {
   const hourA = a ? getLocalHour(now, a.offset) : 0
   const hourB = b ? getLocalHour(now, b.offset) : 0
   const bothBusiness = a && b && hourA >= 9 && hourA < 17 && hourB >= 9 && hourB < 17
+  const isDark = theme === 'dark'
 
   if (cities.length < 2) return null
 
-  const selectClass =
-    'rounded border border-gray-300 dark:bg-gray-700 dark:border-gray-500 dark:text-white px-3 py-1.5 text-sm min-w-[160px]'
-
   return (
-    <section className="max-w-xl mx-auto mb-4 px-4 py-4 rounded-lg border border-gray-200 dark:border-gray-600 bg-gray-50/80 dark:bg-gray-800/50">
-      <h3 className="text-sm font-medium mb-3 text-black dark:text-white">
+    <section
+      className={`max-w-xl mx-auto px-4 py-4 rounded-lg border ${
+        isDark
+          ? 'border-gray-600 bg-gray-800/80'
+          : 'border-gray-200 bg-white'
+      } shadow-sm`}
+    >
+      <h3 className={`text-sm font-semibold mb-3 ${isDark ? 'text-white' : 'text-black'}`}>
         Good time to call?
       </h3>
 
-      {/* Tab bar - matches app rounded/border style */}
-      <div className="flex rounded border border-gray-300 dark:border-gray-600 bg-gray-200/60 dark:bg-gray-700/60 p-0.5 mb-4">
+      <div
+        className={`flex rounded border p-0.5 mb-4 ${
+          isDark ? 'border-gray-600 bg-gray-700/60' : 'border-gray-300 bg-gray-200/60'
+        }`}
+      >
         <button
           type="button"
           onClick={() => setActiveTab(0)}
           className={`flex-1 rounded py-2 px-3 text-sm font-medium transition-colors ${
             activeTab === 0
-              ? 'bg-white dark:bg-gray-700 text-black dark:text-white shadow-sm'
-              : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-gray-200'
+              ? isDark
+                ? 'bg-blue-900/50 text-white ring-1 ring-blue-500'
+                : 'bg-blue-50 text-blue-700 ring-1 ring-blue-300'
+              : isDark
+                ? 'text-gray-400 hover:text-gray-200'
+                : 'text-gray-600 hover:text-black'
           }`}
           aria-pressed={activeTab === 0}
         >
@@ -47,8 +61,12 @@ function GoodTimeToCall({ cities }) {
           onClick={() => setActiveTab(1)}
           className={`flex-1 rounded py-2 px-3 text-sm font-medium transition-colors ${
             activeTab === 1
-              ? 'bg-white dark:bg-gray-700 text-black dark:text-white shadow-sm'
-              : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-gray-200'
+              ? isDark
+                ? 'bg-blue-900/50 text-white ring-1 ring-blue-500'
+                : 'bg-blue-50 text-blue-700 ring-1 ring-blue-300'
+              : isDark
+                ? 'text-gray-400 hover:text-gray-200'
+                : 'text-gray-600 hover:text-black'
           }`}
           aria-pressed={activeTab === 1}
         >
@@ -56,9 +74,8 @@ function GoodTimeToCall({ cities }) {
         </button>
       </div>
 
-      {/* Active tab's city selector - same select style as SettingsBar */}
       <div className="space-y-3">
-        <label className="block text-xs text-gray-500 dark:text-gray-400">
+        <label className={`block text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
           {activeTab === 0 ? 'First city' : 'Second city'}
         </label>
         <select
@@ -73,17 +90,17 @@ function GoodTimeToCall({ cities }) {
             <option key={c.id} value={c.id}>{c.name}</option>
           ))}
         </select>
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          {activeTab === 0
-            ? 'Switch to City B to choose the second city.'
-            : 'Switch to City A to change the first city.'}
+        <p className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+          {activeTab === 0 ? 'Switch to City B tab to pick the second city.' : 'Switch to City A tab to pick the first city.'}
         </p>
         <div className="pt-1">
           <span
-            className={`inline-block text-xs font-medium px-2 py-1 rounded ${
+            className={`inline-block text-xs font-medium px-1.5 py-0.5 rounded ${
               bothBusiness
-                ? 'text-green-700 dark:text-green-300 bg-green-500/20 dark:bg-green-900/40'
-                : 'text-gray-600 dark:text-gray-400 bg-gray-200/80 dark:bg-gray-700'
+                ? 'bg-green-500/30 text-green-800 dark:bg-green-500/30 dark:text-green-100'
+                : isDark
+                  ? 'bg-gray-700 text-gray-400'
+                  : 'bg-gray-200 text-gray-600'
             }`}
           >
             {bothBusiness ? '✓ Both in business hours' : '✗ Not both in business hours'}
