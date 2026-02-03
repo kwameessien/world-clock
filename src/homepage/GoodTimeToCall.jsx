@@ -84,36 +84,41 @@ function GoodTimeToCall({ cities }) {
         </div>
       </div>
 
-      {/* Content below tabs */}
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
-        <select
-          value={cityA}
-          onChange={(e) => setCityA(e.target.value)}
-          className="rounded-full border border-gray-300 dark:bg-gray-700 dark:border-gray-500 dark:text-white px-4 py-2 text-sm bg-white shadow-sm"
-        >
-          {cities.map((c) => (
-            <option key={c.id} value={c.id}>{c.name}</option>
-          ))}
-        </select>
-        <span className="text-sm text-gray-500 dark:text-gray-400">and</span>
-        <select
-          value={cityB}
-          onChange={(e) => setCityB(e.target.value)}
-          className="rounded-full border border-gray-300 dark:bg-gray-700 dark:border-gray-500 dark:text-white px-4 py-2 text-sm bg-white shadow-sm"
-        >
-          {cities.map((c) => (
-            <option key={c.id} value={c.id}>{c.name}</option>
-          ))}
-        </select>
-        <span
-          className={`text-sm font-medium px-3 py-1.5 rounded-full ${
-            bothBusiness
-              ? 'text-green-700 dark:text-green-300 bg-green-100 dark:bg-green-900/40'
-              : 'text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800'
-          }`}
-        >
-          {bothBusiness ? '✓ Both in business hours' : '✗ Not both in business hours'}
-        </span>
+      {/* Content below tabs: show only the active tab's city selector */}
+      <div className="mt-4 space-y-3">
+        <div className="flex flex-col items-center gap-2">
+          <label className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+            {activeTab === 0 ? 'City A' : 'City B'}
+          </label>
+          <select
+            value={activeTab === 0 ? cityA : cityB}
+            onChange={(e) =>
+              activeTab === 0 ? setCityA(e.target.value) : setCityB(e.target.value)
+            }
+            className="rounded-full border border-gray-300 dark:bg-gray-700 dark:border-gray-500 dark:text-white px-4 py-2 text-sm bg-white dark:bg-gray-700 shadow-sm min-w-[200px]"
+            aria-label={activeTab === 0 ? 'Select first city' : 'Select second city'}
+          >
+            {cities.map((c) => (
+              <option key={c.id} value={c.id}>{c.name}</option>
+            ))}
+          </select>
+        </div>
+        <p className="text-center text-xs text-gray-500 dark:text-gray-400">
+          {activeTab === 0
+            ? 'Switch to City B tab to choose the second city.'
+            : 'Switch to City A tab to change the first city.'}
+        </p>
+        <div className="flex justify-center">
+          <span
+            className={`text-sm font-medium px-3 py-1.5 rounded-full ${
+              bothBusiness
+                ? 'text-green-700 dark:text-green-300 bg-green-100 dark:bg-green-900/40'
+                : 'text-gray-600 dark:text-gray-400 bg-gray-100 dark:bg-gray-800'
+            }`}
+          >
+            {bothBusiness ? '✓ Both in business hours' : '✗ Not both in business hours'}
+          </span>
+        </div>
       </div>
     </section>
   )
