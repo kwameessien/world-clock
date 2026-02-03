@@ -33,7 +33,7 @@ function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome,
         <button
           type="button"
           onClick={() => onSetHome(d.city.id)}
-          className="text-xs opacity-70 hover:opacity-100"
+          className={`text-xs hover:opacity-100 ${isDark ? 'text-gray-300 opacity-90' : 'opacity-70'}`}
           title="Set as my location"
         >
           {d.isHome ? '🏠' : '⌂'}
@@ -41,25 +41,25 @@ function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome,
         <button
           type="button"
           onClick={() => onRemoveCity(d.city.id)}
-          className="text-xs opacity-50 hover:opacity-100 hover:text-red-500"
+          className={`text-xs hover:opacity-100 hover:text-red-500 ${isDark ? 'text-gray-300 opacity-90' : 'opacity-50'}`}
           title="Remove city"
         >
           ✕
         </button>
       </div>
       <div
-        className={`${py} ${textSize} ${isDark ? 'text-gray-100' : 'text-black'} city-name`}
+        className={`${py} ${textSize} ${isDark ? 'text-white font-medium' : 'text-black'} city-name`}
         title={`${d.city.name} (${d.timezoneLabel}) • ${d.date} • ${d.time}${d.isBusinessHours ? ' • Business hours' : ''}`}
       >
         {d.city.name}
       </div>
-      <div className={`${py} ${textSize} ${isDark ? 'text-gray-200' : 'text-black'} time-display`}>
+      <div className={`${py} ${textSize} ${isDark ? 'text-white' : 'text-black'} time-display`}>
         {d.time}
       </div>
       {!compact && (
         <>
-          <div className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>{d.date}</div>
-          <div className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-600'}`}>
+          <div className={`text-xs ${isDark ? 'text-gray-300' : 'text-gray-500'}`}>{d.date}</div>
+          <div className={`text-xs ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
             {d.timezoneLabel} (UTC{d.offsetHours >= 0 ? '+' : ''}{d.offsetHours})
           </div>
         </>
@@ -69,7 +69,7 @@ function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome,
           {d.isDay ? '☀️' : '🌙'}
         </span>
         {d.isBusinessHours && (
-          <span className="text-xs bg-green-500/20 text-green-700 dark:text-green-400 px-1.5 py-0.5 rounded">
+          <span className="text-xs bg-green-500/30 text-green-800 dark:bg-green-500/30 dark:text-green-100 px-1.5 py-0.5 rounded font-medium">
             Work
           </span>
         )}
@@ -78,7 +78,7 @@ function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome,
         <button
           type="button"
           onClick={() => onMoveCity(d.city.id, 'up')}
-          className="text-xs opacity-60 hover:opacity-100"
+          className={`text-xs hover:opacity-100 ${isDark ? 'text-gray-300 opacity-90' : 'text-gray-600 opacity-60'}`}
           title="Move up"
         >
           ↑
@@ -86,7 +86,7 @@ function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome,
         <button
           type="button"
           onClick={() => onMoveCity(d.city.id, 'down')}
-          className="text-xs opacity-60 hover:opacity-100"
+          className={`text-xs hover:opacity-100 ${isDark ? 'text-gray-300 opacity-90' : 'text-gray-600 opacity-60'}`}
           title="Move down"
         >
           ↓
@@ -104,7 +104,7 @@ function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome,
 
   if (displayData.length === 0) {
     return (
-      <div className={`min-h-[40vh] flex items-center justify-center ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+      <div className={`min-h-[40vh] flex items-center justify-center ${isDark ? 'text-gray-300' : 'text-gray-500'}`}>
         <p>No cities. Use “Add city” or clear search.</p>
       </div>
     )

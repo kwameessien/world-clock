@@ -12,6 +12,15 @@
   font-weight: 400;
 }
 
+/* Dark mode: ensure clock text is highly visible */
+html.dark .city-name,
+html.dark .time-display {
+  color: #ffffff;
+}
+html.dark .time-display {
+  font-weight: 500;
+}
+
 /* Marquee: top row moves right */
 .marquee-track-right {
   display: flex;

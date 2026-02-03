@@ -19,29 +19,29 @@ function GoodTimeToCall({ cities }) {
   if (cities.length < 2) return null
 
   return (
-    <section className="max-w-xl mx-auto mb-4 p-4 rounded-lg bg-gray-100 dark:bg-gray-800">
-      <h3 className="text-sm font-medium mb-2">Good time to call?</h3>
+    <section className="max-w-xl mx-auto mb-4 p-4 rounded-lg bg-gray-100 dark:bg-gray-800 dark:border dark:border-gray-600">
+      <h3 className="text-sm font-medium mb-2 text-black dark:text-white">Good time to call?</h3>
       <div className="flex flex-wrap items-center gap-2">
         <select
           value={cityA}
           onChange={(e) => setCityA(e.target.value)}
-          className="rounded border dark:bg-gray-700 dark:border-gray-600 px-2 py-1 text-sm"
+          className="rounded border border-gray-300 dark:bg-gray-700 dark:border-gray-500 dark:text-white px-2 py-1 text-sm"
         >
           {cities.map((c) => (
             <option key={c.id} value={c.id}>{c.name}</option>
           ))}
         </select>
-        <span className="text-sm">and</span>
+        <span className="text-sm text-black dark:text-gray-200">and</span>
         <select
           value={cityB}
           onChange={(e) => setCityB(e.target.value)}
-          className="rounded border dark:bg-gray-700 dark:border-gray-600 px-2 py-1 text-sm"
+          className="rounded border border-gray-300 dark:bg-gray-700 dark:border-gray-500 dark:text-white px-2 py-1 text-sm"
         >
           {cities.map((c) => (
             <option key={c.id} value={c.id}>{c.name}</option>
           ))}
         </select>
-        <span className={`text-sm font-medium ${bothBusiness ? 'text-green-600 dark:text-green-400' : 'text-gray-500 dark:text-gray-400'}`}>
+        <span className={`text-sm font-medium ${bothBusiness ? 'text-green-600 dark:text-green-300' : 'text-gray-500 dark:text-gray-300'}`}>
           {bothBusiness ? '✓ Both in business hours' : '✗ Not both in business hours'}
         </span>
       </div>
