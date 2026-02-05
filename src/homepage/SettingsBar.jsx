@@ -52,7 +52,7 @@ function SettingsBar({ settings, onUpdate, onAddCity, onShare }) {
         placeholder="Search cities..."
         value={settings.searchQuery}
         onChange={(e) => onUpdate({ searchQuery: e.target.value })}
-        className="rounded border border-gray-300 dark:bg-gray-700 dark:border-gray-500 dark:text-white dark:placeholder-gray-400 px-3 py-1.5 text-sm min-w-[160px]"
+        className="rounded border border-gray-300 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-100 dark:placeholder-gray-300 px-3 py-1.5 text-sm min-w-[160px] focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
       />
 
       <button
@@ -66,7 +66,7 @@ function SettingsBar({ settings, onUpdate, onAddCity, onShare }) {
       <button
         type="button"
         onClick={onShare}
-        className="rounded bg-gray-200 dark:bg-gray-600 dark:text-white px-3 py-1.5 text-sm hover:bg-gray-300 dark:hover:bg-gray-500"
+        className="rounded bg-gray-200 dark:bg-gray-500 dark:text-white dark:border dark:border-gray-400 px-3 py-1.5 text-sm hover:bg-gray-300 dark:hover:bg-gray-400 dark:hover:border-gray-300"
       >
         Share link
       </button>
