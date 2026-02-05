@@ -58,3 +58,8 @@ html.dark .time-display {
   width: 100%;
   max-width: 100vw;
 }
+
+.marquee-container:hover .marquee-track-right,
+.marquee-container:hover .marquee-track-left {
+  animation-play-state: paused;
+}
