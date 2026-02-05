@@ -1,12 +1,19 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import '../App.css'
 
 function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome, onRemoveCity, onMoveCity }) {
   const [copiedId, setCopiedId] = useState(null)
+  const copyTimeoutRef = useRef(null)
   const theme = settings?.theme ?? 'light'
   const fontSize = settings?.fontSize ?? 'normal'
   const compact = settings?.compactView ?? false
   const isDark = theme === 'dark'
+
+  useEffect(() => {
+    return () => {
+      if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current)
+    }
+  }, [])
 
   const half = Math.ceil(displayData.length / 2)
   const firstRow = displayData.slice(0, half)
@@ -18,8 +25,12 @@ function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome,
   const copyTime = (d) => {
     const text = `${d.city.name}: ${d.time} ${d.timezoneLabel}`
     navigator.clipboard?.writeText(text).then(() => {
+      if (copyTimeoutRef.current) clearTimeout(copyTimeoutRef.current)
       setCopiedId(d.city.id)
-      setTimeout(() => setCopiedId(null), 1500)
+      copyTimeoutRef.current = setTimeout(() => {
+        setCopiedId(null)
+        copyTimeoutRef.current = null
+      }, 1500)
     }).catch(() => {})
   }
 
@@ -63,7 +74,7 @@ function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome,
           title="Copy time"
           aria-label="Copy time"
         >
-          {copiedId === d.city.id ? '✓' : '📋'}
+          {copiedId === d.city.id && !keyPrefix.includes('-dup') ? '✓' : '📋'}
         </button>
       </div>
       <div
