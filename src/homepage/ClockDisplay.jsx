@@ -70,10 +70,12 @@ function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome,
         <button
           type="button"
           onClick={() => copyTime(d)}
-          className={`p-1 rounded hover:bg-black/10 dark:hover:bg-white/10 transition-colors ${
+          className={`p-1 rounded transition-colors ${
             copiedId === d.city.id && !keyPrefix.includes('-dup')
               ? isDark ? 'text-green-400 bg-green-500/20' : 'text-green-600 bg-green-500/20'
-              : ''
+              : isDark
+                ? 'text-gray-400 hover:text-gray-200 hover:bg-white/10'
+                : 'text-gray-400 hover:text-gray-600 hover:bg-gray-200/80'
           }`}
           title="Copy time"
           aria-label="Copy time"
