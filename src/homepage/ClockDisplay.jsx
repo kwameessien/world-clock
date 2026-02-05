@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import '../App.css'
 
 function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome, onRemoveCity, onMoveCity }) {
+  const [copiedId, setCopiedId] = useState(null)
   const theme = settings?.theme ?? 'light'
   const fontSize = settings?.fontSize ?? 'normal'
   const compact = settings?.compactView ?? false
@@ -12,6 +14,14 @@ function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome,
 
   const textSize = fontSize === 'large' ? 'text-lg' : 'text-base'
   const py = compact ? 'py-2' : 'py-5'
+
+  const copyTime = (d) => {
+    const text = `${d.city.name}: ${d.time} ${d.timezoneLabel}`
+    navigator.clipboard?.writeText(text).then(() => {
+      setCopiedId(d.city.id)
+      setTimeout(() => setCopiedId(null), 1500)
+    }).catch(() => {})
+  }
 
   const renderItem = (d, globalIndex, keyPrefix) => (
     <li
@@ -45,6 +55,15 @@ function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome,
           title="Remove city"
         >
           ✕
+        </button>
+        <button
+          type="button"
+          onClick={() => copyTime(d)}
+          className={`text-xs hover:opacity-100 ${isDark ? 'text-gray-300 opacity-90' : 'text-gray-600 opacity-70'}`}
+          title="Copy time"
+          aria-label="Copy time"
+        >
+          {copiedId === d.city.id ? '✓' : '📋'}
         </button>
       </div>
       <div
