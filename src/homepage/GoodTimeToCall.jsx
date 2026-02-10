@@ -21,6 +21,16 @@ function GoodTimeToCall({ cities, theme = 'light' }) {
   const bothBusiness = a && b && hourA >= 9 && hourA < 17 && hourB >= 9 && hourB < 17
   const isDark = theme === 'dark'
 
+  const diffHours = a && b ? a.offset - b.offset : 0
+  const timeDiffText =
+    !a || !b
+      ? null
+      : diffHours === 0
+        ? `${a.name} and ${b.name} are in the same time zone`
+        : diffHours > 0
+          ? `${a.name} is ${diffHours === 1 ? '1 hour' : `${diffHours} hours`} ahead of ${b.name}`
+          : `${a.name} is ${-diffHours === 1 ? '1 hour' : `${-diffHours} hours`} behind ${b.name}`
+
   if (cities.length < 2) return null
 
   return (
@@ -93,9 +103,9 @@ function GoodTimeToCall({ cities, theme = 'light' }) {
         <p className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
           {activeTab === 0 ? 'Switch to City B tab to pick the second city.' : 'Switch to City A tab to pick the first city.'}
         </p>
-        <div className="pt-1">
+        <div className="pt-1 flex flex-wrap items-center gap-2">
           <span
-            className={`inline-block text-xs font-medium px-1.5 py-0.5 rounded ${
+            className={`inline-block text-xs font-medium px-1.5 py-0.5 rounded shrink-0 ${
               bothBusiness
                 ? 'bg-green-500/30 text-green-800 dark:bg-green-500/30 dark:text-green-100'
                 : isDark
@@ -105,6 +115,11 @@ function GoodTimeToCall({ cities, theme = 'light' }) {
           >
             {bothBusiness ? '✓ Both in business hours' : '✗ Not both in business hours'}
           </span>
+          {timeDiffText && (
+            <span className={`text-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+              {timeDiffText}
+            </span>
+          )}
         </div>
       </div>
     </section>
