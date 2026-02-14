@@ -105,7 +105,7 @@ function ClockDisplay({ displayData = [], settings, onToggleFavorite, onSetHome,
   if (displayData.length === 0) {
     return (
       <div className={`min-h-[40vh] flex items-center justify-center ${isDark ? 'text-gray-300' : 'text-gray-500'}`}>
-        <p>No cities. Use “Add city” or clear search.</p>
+        <p>No cities. Use "Add city" or clear search.</p>
       </div>
     )
   }

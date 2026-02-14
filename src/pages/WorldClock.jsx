@@ -1,11 +1,8 @@
-import { useState, useEffect } from 'react'
-import ClockDisplay from './ClockDisplay'
-import SettingsBar from './SettingsBar'
-import AddCityModal from './AddCityModal'
-import GoodTimeToCall from './GoodTimeToCall'
-import TimeZoneMap from './TimeZoneMap'
-import MeetingPlanner from './MeetingPlanner'
-import { useWorldClockSettings } from './useWorldClockSettings'
+import { useEffect, useState } from 'react'
+import ClockDisplay from '../components/ClockDisplay'
+import GoodTimeToCall from '../components/GoodTimeToCall'
+import TimeZoneMap from '../components/TimeZoneMap'
+import { useWorldClockSettings } from '../hooks/useWorldClockSettings'
 import { getCitiesByIds } from '../data/cities'
 
 function pad(i) {
@@ -65,8 +62,7 @@ function computeClockData(cities, use12h) {
 }
 
 function WorldClock() {
-  const { settings, update, toggleFavorite, setHome, addCity, removeCity, moveCity } = useWorldClockSettings()
-  const [showAddCity, setShowAddCity] = useState(false)
+  const { settings, toggleFavorite, setHome, removeCity, moveCity } = useWorldClockSettings()
 
   const cities = getCitiesByIds(settings.cityIds)
   const filteredCities = settings.searchQuery.trim()
@@ -88,38 +84,11 @@ function WorldClock() {
     isHome: settings.homeCityId === d.city.id,
   }))
 
-  const shareUrl = () => {
-    const base = window.location.origin + window.location.pathname
-    const params = new URLSearchParams()
-    settings.cityIds.forEach((id) => params.append('c', id))
-    return `${base}?${params.toString()}`
-  }
-
-  const handleShare = () => {
-    navigator.clipboard?.writeText(shareUrl())
-  }
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('dark', settings.theme === 'dark')
-  }, [settings.theme])
-
   return (
     <div className={`min-h-screen ${settings.theme === 'dark' ? 'bg-gray-900 text-gray-100' : 'bg-white text-black'}`}>
-      <SettingsBar
-        settings={settings}
-        onUpdate={update}
-        onAddCity={() => setShowAddCity(true)}
-        onShare={handleShare}
-      />
-
       <div className="py-4 px-2 space-y-4">
         <GoodTimeToCall cities={filteredCities} theme={settings.theme} />
         <TimeZoneMap theme={settings.theme} />
-        <MeetingPlanner
-          cities={filteredCities}
-          theme={settings.theme}
-          homeCityId={settings.homeCityId}
-        />
       </div>
 
       <ClockDisplay
@@ -130,14 +99,6 @@ function WorldClock() {
         onRemoveCity={removeCity}
         onMoveCity={moveCity}
       />
-
-      {showAddCity && (
-        <AddCityModal
-          currentIds={settings.cityIds}
-          onAdd={addCity}
-          onClose={() => setShowAddCity(false)}
-        />
-      )}
     </div>
   )
 }

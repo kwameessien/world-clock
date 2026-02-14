@@ -1,7 +1,19 @@
+import { NavLink } from 'react-router-dom'
+
 function SettingsBar({ settings, onUpdate, onAddCity, onShare }) {
+  const linkClass = ({ isActive }) =>
+    `text-sm font-medium ${isActive ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white'}`
+
   return (
     <header className="sticky top-0 z-20 flex flex-wrap items-center gap-4 p-4 border-b border-gray-200 dark:border-gray-600 bg-white/90 dark:bg-gray-900/95 backdrop-blur">
-      <h1 className="text-xl font-semibold mr-4 text-black dark:text-white">World Clock</h1>
+      <nav className="flex items-center gap-3 mr-2">
+        <NavLink to="/" end className={linkClass}>
+          World Clock
+        </NavLink>
+        <NavLink to="/meeting-planner" className={linkClass}>
+          Meeting planner
+        </NavLink>
+      </nav>
 
       <label className="flex items-center gap-2 cursor-pointer text-black dark:text-gray-100">
         <input
