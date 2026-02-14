@@ -17,11 +17,17 @@ function MeetingPlannerPage() {
         isDark ? 'bg-gray-900 text-gray-100' : 'bg-white text-black'
       }`}
     >
-      <MeetingPlanner
-        cities={filteredCities}
-        theme={settings.theme}
-        homeCityId={settings.homeCityId}
-      />
+      {filteredCities.length === 0 ? (
+        <p className={`text-center py-12 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+          Add cities on the World Clock page to use the Meeting planner.
+        </p>
+      ) : (
+        <MeetingPlanner
+          cities={filteredCities}
+          theme={settings.theme}
+          homeCityId={settings.homeCityId}
+        />
+      )}
     </div>
   )
 }

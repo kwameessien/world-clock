@@ -24,11 +24,6 @@ function getCityIdsFromUrl() {
 function loadSettings() {
   const urlIds = getCityIdsFromUrl()
   if (urlIds && urlIds.length > 0) {
-    try {
-      window.history.replaceState({}, '', window.location.pathname)
-    } catch {
-      // ignore history API errors
-    }
     return { ...defaultSettings, cityIds: urlIds }
   }
   try {
@@ -60,6 +55,18 @@ export function useWorldClockSettings() {
   useEffect(() => {
     saveSettings(settings)
   }, [settings])
+
+  // Defer URL cleanup to avoid interfering with React Router during initial render
+  useEffect(() => {
+    const urlIds = getCityIdsFromUrl()
+    if (urlIds && urlIds.length > 0) {
+      try {
+        window.history.replaceState({}, '', window.location.pathname)
+      } catch {
+        // ignore
+      }
+    }
+  }, [])
 
   const update = useCallback((partial) => {
     setSettings((prev) => ({ ...prev, ...partial }))

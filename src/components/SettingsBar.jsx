@@ -10,9 +10,16 @@ function SettingsBar({ settings, onUpdate, onAddCity, onShare }) {
         <NavLink to="/" end className={linkClass}>
           World Clock
         </NavLink>
-        <NavLink to="/meeting-planner" className={linkClass}>
+        <a
+          href="/meeting-planner"
+          onClick={(e) => {
+            e.preventDefault()
+            window.location.assign('/meeting-planner' + window.location.search)
+          }}
+          className={linkClass({ isActive: window.location.pathname === '/meeting-planner' })}
+        >
           Meeting planner
-        </NavLink>
+        </a>
       </nav>
 
       <label className="flex items-center gap-2 cursor-pointer text-black dark:text-gray-100">
