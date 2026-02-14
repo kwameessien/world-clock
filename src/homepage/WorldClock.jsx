@@ -4,6 +4,7 @@ import SettingsBar from './SettingsBar'
 import AddCityModal from './AddCityModal'
 import GoodTimeToCall from './GoodTimeToCall'
 import TimeZoneMap from './TimeZoneMap'
+import MeetingPlanner from './MeetingPlanner'
 import { useWorldClockSettings } from './useWorldClockSettings'
 import { getCitiesByIds } from '../data/cities'
 
@@ -114,6 +115,11 @@ function WorldClock() {
       <div className="py-4 px-2 space-y-4">
         <GoodTimeToCall cities={filteredCities} theme={settings.theme} />
         <TimeZoneMap theme={settings.theme} />
+        <MeetingPlanner
+          cities={filteredCities}
+          theme={settings.theme}
+          homeCityId={settings.homeCityId}
+        />
       </div>
 
       <ClockDisplay
