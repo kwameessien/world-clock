@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { useWorldClockSettings } from '../hooks/useWorldClockSettings'
 import SettingsBar from '../components/SettingsBar'
@@ -7,7 +7,7 @@ import AddCityModal from '../components/AddCityModal'
 function AppLayout() {
   const { settings, update, addCity } = useWorldClockSettings()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.classList.toggle('dark', settings.theme === 'dark')
   }, [settings.theme])
   const [showAddCity, setShowAddCity] = useState(false)

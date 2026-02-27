@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      try {
+        var s = localStorage.getItem('world-clock-settings');
+        if (s) {
+          var p = JSON.parse(s);
+          if (p.theme === 'dark') document.documentElement.classList.add('dark');
+        }
+      } catch (_) {}
+    </script>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/clock.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
