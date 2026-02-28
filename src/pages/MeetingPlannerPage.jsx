@@ -13,7 +13,7 @@ function MeetingPlannerPage() {
 
   return (
     <div className={`min-h-screen ${isDark ? 'bg-gray-900 text-gray-100' : 'bg-white text-black'}`}>
-      <div className="py-4 px-2 max-w-xl mx-auto">
+      <div className="py-4 px-4 w-full max-w-[1400px] mx-auto">
         {filteredCities.length === 0 ? (
           <section
             className={`rounded-lg border p-8 text-center ${
