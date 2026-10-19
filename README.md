@@ -15,6 +15,14 @@ npm run build    # production build in dist/
 npm run lint
 ```
 
+## Deployment
+
+The site is live at **https://kwameessien.github.io/world-clock/**, on GitHub Pages.
+
+- Every push to `main` runs `.github/workflows/deploy.yml`, which builds the app and publishes `dist/`. Pages is set to use GitHub Actions as its source.
+- Production builds use the base path `/world-clock/` (`vite.config.js`); the dev server stays at `/`. The router takes its `basename` from `import.meta.env.BASE_URL`, and paths in `public/manifest.json` are relative, so all three follow the base.
+- Pages can't route paths like `/table` itself, so the workflow copies `index.html` to `404.html`. A deep link loads the app with a 404 status and the router shows the right view. Visitors won't notice, but search engines may not index those inner pages.
+
 ## How the text is made
 
 - **Times, offsets and dates** come from `Intl` with IANA zones (`src/lib/time.js`), so daylight saving is always right. No offsets are stored.
