@@ -1,7 +1,8 @@
-// Geometry for the two dial sizes. Units are SVG user units; the SVG scales to fit.
+// Geometry for the two dial sizes, in Figma pixels: the desktop dial box is 604 with a 580 ring,
+// the mobile one a 390-wide frame with a 224 ring. Labels overflow the box.
 export const SIZES = {
-  full: { size: 960, R: 280, band: 26, labelGap: 18, numeralGap: 18, arc: 74, diffAt: 100, dot: 5, home: 10 },
-  compact: { size: 420, R: 112, band: 16, labelGap: 10, numeralGap: 11, arc: 30, diffAt: 48, dot: 3.5, home: 7 },
+  full: { size: 604, R: 290, band: 26, labelGap: 18, numeralGap: 18, arc: 74, diffAt: 100, dot: 5, home: 10 },
+  compact: { size: 390, R: 112, band: 16, labelGap: 10, numeralGap: 11, arc: 30, diffAt: 48, dot: 3.5, home: 7 },
 }
 
 /** Midnight at the top, noon at the bottom, clockwise. Degrees from +x. */
