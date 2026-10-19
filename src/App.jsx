@@ -1,16 +1,20 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './App.css'
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import AppLayout from './layout/AppLayout'
-import WorldClock from './pages/WorldClock'
-import MeetingPlannerPage from './pages/MeetingPlannerPage'
+import DialPage from './pages/DialPage'
+import TablePage from './pages/TablePage'
+import ScoresPage from './pages/ScoresPage'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <AppLayout />,
     children: [
-      { index: true, element: <WorldClock /> },
-      { path: 'meeting-planner', element: <MeetingPlannerPage /> },
+      { index: true, element: <DialPage /> },
+      { path: 'table', element: <TablePage /> },
+      { path: 'scores', element: <ScoresPage /> },
+      // The old meeting planner became the Table.
+      { path: 'meeting-planner', element: <Navigate to="/table" replace /> },
+      { path: '*', element: <Navigate to="/" replace /> },
     ],
   },
 ])

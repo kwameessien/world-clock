@@ -1,11 +1,11 @@
 {
   "name": "World Clock",
   "short_name": "World Clock",
-  "description": "World clock with multiple cities, timezones, and features",
+  "description": "A world clock you read: every city on one 24-hour dial, a table for finding a time to meet, and the time written out in words.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#1e40af",
+  "background_color": "#F2F0EB",
+  "theme_color": "#F2F0EB",
   "icons": [
     {
       "src": "/clock.png",
