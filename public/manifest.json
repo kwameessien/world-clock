@@ -2,13 +2,13 @@
   "name": "World Clock",
   "short_name": "World Clock",
   "description": "A world clock you read: every city on one 24-hour dial, a table for finding a time to meet, and the time written out in words.",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#F2F0EB",
   "theme_color": "#F2F0EB",
   "icons": [
     {
-      "src": "/clock.png",
+      "src": "clock.png",
       "sizes": "192x192",
       "type": "image/png"
     }
