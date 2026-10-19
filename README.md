@@ -17,10 +17,11 @@ npm run lint
 
 ## Deployment
 
-The site is live at **https://kwameessien.github.io/world-clock/**, on GitHub Pages.
+The site is live at **https://clock.kwame.co**, on GitHub Pages. The old `kwameessien.github.io/world-clock/` address redirects there.
 
 - Every push to `main` runs `.github/workflows/deploy.yml`, which builds the app and publishes `dist/`. Pages is set to use GitHub Actions as its source.
-- Production builds use the base path `/world-clock/` (`vite.config.js`); the dev server stays at `/`. The router takes its `basename` from `import.meta.env.BASE_URL`, and paths in `public/manifest.json` are relative, so all three follow the base.
+- The custom domain is set in the repo's Pages settings, and `public/CNAME` records it. DNS for kwame.co is at GoDaddy: `clock` is a CNAME to `kwameessien.github.io`.
+- The app is served from the domain root, so Vite and the router need no base path.
 - Pages can't route paths like `/table` itself, so the workflow copies `index.html` to `404.html`. A deep link loads the app with a 404 status and the router shows the right view. Visitors won't notice, but search engines may not index those inner pages.
 
 ## How the text is made

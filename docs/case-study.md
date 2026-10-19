@@ -1,7 +1,7 @@
 # World Clock
 
 **A world clock you read, not a dashboard you scan.**
-Design and front-end, 2025–2026 · React, Vite, Figma · [kwame.co/world-clock](https://kwame.co/world-clock)
+Design and front-end, 2025–2026 · React, Vite, Figma · [clock.kwame.co](https://clock.kwame.co)
 
 ## The problem
 

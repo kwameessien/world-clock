@@ -17,10 +17,7 @@ const router = createBrowserRouter([
       { path: '*', element: <Navigate to="/" replace /> },
     ],
   },
-], {
-  // Without the trailing slash, /world-clock (as kwame.co serves it) matches too.
-  basename: import.meta.env.BASE_URL.replace(/\/$/, '') || '/',
-})
+])
 
 function App() {
   return <RouterProvider router={router} />
