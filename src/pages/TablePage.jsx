@@ -49,6 +49,8 @@ function TablePage() {
                 </p>
                 <div className="strip" aria-label={`${row.city.name}, hours across ${home.name}'s day`}>
                   {row.cells.map((cell, i) => <span key={i} className={`s-${cell.state}`} title={cellLabel(cell, use12h)} />)}
+                  {w && <i className="strip-best" style={{ left: pct(w.from), width: pct(w.to - w.from + 1) }} />}
+                  <i className="strip-now" style={{ left: pct(nowColumn), width: pct(1) }} />
                 </div>
               </div>
             )
@@ -56,8 +58,6 @@ function TablePage() {
           <div className="strip-axis caption">
             {[0, 6, 12, 18].map((h) => <span key={h} style={{ left: pct(h) }}>{formatHour(h, use12h)}</span>)}
           </div>
-          {w && <div className="strip-best" style={{ left: pct(w.from), width: pct(w.to - w.from + 1) }} />}
-          <div className="strip-now" style={{ left: pct(nowColumn), width: pct(1) }} />
         </div>
         <p className="caption strip-legend">
           {w && <>▢ Best {formatHour(w.from, use12h)}–{formatHour((w.to + 1) % 24, use12h)}    </>}

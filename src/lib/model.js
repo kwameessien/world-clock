@@ -49,6 +49,8 @@ export function clusterForDial(entries) {
 /**
  * The Table: for each hour of home's day, each city's local time and state,
  * the number of cities at work, and the longest run of best-covered hours.
+ * The window only uses hours home could take a call: its working hours, or its
+ * daytime when home has none today (a weekend).
  */
 export function buildPlanner(cities, now, home) {
   const h = zoned(now, home.tz)
@@ -63,13 +65,18 @@ export function buildPlanner(cities, now, home) {
     }),
   }))
   const counts = columns.map((_, i) => rows.filter((r) => r.cells[i].state === 'work').length)
-  const best = Math.max(0, ...counts)
+  const homeCells = columns.map((instant) => hourState(home, zoned(instant, home.tz)))
+  const usable = homeCells.includes('work')
+    ? homeCells.map((s) => s === 'work')
+    : homeCells.map((s) => s !== 'night')
+  const best = Math.max(0, ...counts.filter((_, i) => usable[i]))
+  const isBest = (i) => usable[i] && counts[i] === best
   let window = null
   if (best > 0) {
     for (let i = 0; i < 24; i++) {
-      if (counts[i] !== best) continue
+      if (!isBest(i)) continue
       let j = i
-      while (j + 1 < 24 && counts[j + 1] === best) j++
+      while (j + 1 < 24 && isBest(j + 1)) j++
       if (!window || j - i > window.to - window.from) window = { from: i, to: j }
       i = j
     }
