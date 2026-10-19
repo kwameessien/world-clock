@@ -24,15 +24,7 @@ npm run lint
 
 ## Typeface
 
-The voice face is **Aujournuit Densed**; the data face is IBM Plex Mono (bundled via Fontsource).
-
-Aujournuit is not bundled. The page uses it, in order:
-
-1. from the visitor's computer, if it is installed (`local('Aujournuit Densed')`);
-2. from `public/fonts/Aujournuit-Densed.woff2` or `public/fonts/Aujournuit-Densed.otf`, if you add those files;
-3. otherwise it falls back to Instrument Serif.
-
-To ship it to everyone, put the font files in `public/fonts/` with those names (check the licence allows web use). The `@font-face` rule is at the top of `src/index.css`.
+The voice face is **Aujournuit Densed**, bundled at `public/fonts/Aujournuit-Densed.otf`; the data face is IBM Plex Mono (bundled via Fontsource). If the visitor has Aujournuit Densed installed, that copy is used instead. The `@font-face` rule is at the top of `src/index.css`.
 
 ## Design
 

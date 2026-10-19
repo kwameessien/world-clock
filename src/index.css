@@ -1,14 +1,12 @@
 @import "tailwindcss";
 
 /*
- * Aujournuit Densed is the voice face. It is used from the visitor's machine
- * when installed, otherwise from /public/fonts (add the files there, see
- * README), and falls back to Instrument Serif.
+ * Aujournuit Densed is the voice face, bundled in /public/fonts. An installed
+ * copy on the visitor's machine is used first.
  */
 @font-face {
   font-family: 'Aujournuit Densed';
   src: local('Aujournuit Densed'), local('Aujournuit-Densed'), local('AujournuitDensed'),
-    url('/fonts/Aujournuit-Densed.woff2') format('woff2'),
     url('/fonts/Aujournuit-Densed.otf') format('opentype');
   font-display: swap;
 }
@@ -22,7 +20,7 @@
   --night: #E4E0D6;
   --work: #F1E4A6;
   --signal: #E23B1E;
-  --serif: 'Aujournuit Densed', 'Instrument Serif', Georgia, serif;
+  --serif: 'Aujournuit Densed', Georgia, serif;
   --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
   --gutter: 2.5rem;
   color-scheme: light;
